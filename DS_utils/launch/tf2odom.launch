@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+<param name ="/use_sim_time" value="true"/>
+       <arg name="play_bag" default="true" />
+  <!-- <arg name="bag_file" default="/media/lzb/Windows-SSD/ubuntu16/datasets/uav_2019-11-21-19-33-27.bag"/> -->
+    <arg name="bag_file" default="/media/lzb/Windows-SSD/ubuntu18/rosbag/jkw3_t265_l515/liu0.bag"/>
+
+  <node name="player" pkg="rosbag" type="play" output="screen" args=" -r 1.0 --clock $(arg bag_file)" if="$(arg play_bag)" launch-prefix="xterm -e"/>
+  
+  <!-- TF FRAMES -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="cam_base_link" 
+    args="0.0 0.0 0.0 0.0 0.785 0.0 t265_pose_frame temp_link 100" /> -->
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="cam_base_link1" 
+    args="0.0 0.0 0.0 -1.57 0.0 0.0 temp_link camera_pixel_link 100" /> -->
+
+  <node name="tf2odom" pkg="ds_utils" type="tf2odom" output="screen"/>
+
+
+</launch>
